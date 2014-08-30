@@ -1,0 +1,131 @@
+<?xml version="1.0"?>
+<!--
+
+/**
+ * Rootd Link Module
+ *
+ * @todo      Complete multi-store support
+ *
+ * @see       http://blog.rickbuczynski.com/magento/rootd-link-enhanced-url-rewrites
+ *
+ * @package   Rootd_Link
+ * @author    Rick Buczynski <me@rickbuczynski.com>
+ * @copyright 2014 Rick Buczynski. All Rights Reserved.
+ */
+
+-->
+<config>
+    <modules>
+        <Rootd_Link>
+            <version>0.0.6</version>
+        </Rootd_Link>
+    </modules>
+    <default>
+        <rootd_link>
+            <attachment_base><![CDATA[media/l/]]></attachment_base>
+            <translations>
+                <protected_title><![CDATA[Protected Content]]></protected_title>
+                <protected_text><![CDATA[This is a protected link. Please enter the password to view its contents.]]></protected_text>
+                <view_text><![CDATA[View Content]]></view_text>
+            </translations>
+        </rootd_link>
+    </default>
+    <global>
+        <helpers>
+            <link>
+                <class>Rootd_Link_Helper</class>
+            </link>
+        </helpers>
+        <blocks>
+            <link>
+                <class>Rootd_Link_Block</class>
+            </link>
+        </blocks>
+        <models>
+            <link>
+                <class>Rootd_Link_Model</class>
+                <resourceModel>link_resource</resourceModel>
+            </link>
+            <link_resource>
+                <class>Rootd_Link_Model_Resource</class>
+                <entities>
+                    <node>
+                        <table>rootd_link_node</table>
+                    </node>
+                    <node_attachment>
+                        <table>rootd_link_node_attachment</table>
+                    </node_attachment>
+                </entities>
+            </link_resource>
+        </models>
+        <resources>
+            <rootd_link_setup>
+                <setup>
+                    <module>Rootd_Link</module>
+                </setup>
+                <connection>
+                   <use>core_setup</use>
+                </connection>
+             </rootd_link_setup>
+             <link_write>
+                <connection>
+                   <use>core_write</use>
+                </connection>
+             </link_write>
+             <link_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </link_read>
+        </resources>
+        <events>
+            <controller_front_init_routers>
+                <observers>
+                    <link>
+                        <class>Rootd_Link_Controller_Router</class>
+                        <method>initRouter</method>
+                    </link>
+                </observers>
+            </controller_front_init_routers>
+        </events>
+    </global>
+    <frontend>
+        <routers>
+            <rootd_link>
+                <use>standard</use>
+                <args>
+                    <module>Rootd_Link</module>
+                    <frontName>l</frontName>
+                </args>
+            </rootd_link>
+        </routers>
+        <layout>
+            <updates>
+                <link module="Rootd_Link">
+                    <file>link.xml</file>
+                </link>
+            </updates>
+        </layout>
+    </frontend>
+    <adminhtml>
+        <layout>
+            <updates>
+                <link module="Rootd_Link">
+                    <file>link.xml</file>
+                </link>
+            </updates>
+        </layout>
+    </adminhtml>
+    <admin>
+        <routers>
+            <adminhtml>
+                <use>admin</use>
+                <args>
+                    <modules>
+                        <rootd_link before="Mage_Adminhtml">Rootd_Link_Adminhtml</rootd_link>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>
+</config>

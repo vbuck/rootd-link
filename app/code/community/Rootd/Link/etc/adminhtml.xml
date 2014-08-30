@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<!--
+
+/**
+ * Rootd Link system configuration ACL.
+ *
+ * @package   Rootd_Link
+ * @author    Rick Buczynski <me@rickbuczynski.com>
+ * @copyright 2014 Rick Buczynski. All Rights Reserved.
+ */
+
+-->
+<config>
+    <menu>
+         <cms>
+            <children>
+                <link translate="title" module="link">
+                    <title><![CDATA[Rootd Links]]></title>
+                    <action>adminhtml/link</action>
+                    <sort_order>75</sort_order>
+                </link>
+            </children>
+         </cms>
+    </menu>
+    <acl>
+        <resources>
+            <admin>
+                <children>
+                    <cms>
+                        <children>
+                            <link translate="title">
+                                <title><![CDATA[Rootd Links]]></title>
+                                <sort_order>75</sort_order>
+                            </link>
+                        </children>
+                    </cms>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <rootd_link>
+                                        <title>Rootd Extensions: Links</title>
+                                    </rootd_link>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config> 

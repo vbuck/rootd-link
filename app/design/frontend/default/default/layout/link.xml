@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<!--
+
+/**
+ * Rootd Link layout updates
+ *
+ * @package   Rootd_Link
+ * @author    Rick Buczynski <me@rickbuczynski.com>
+ * @copyright 2014 Rick Buczynski. All Rights Reserved.
+ */
+
+-->
+<layout version="0.0.1">
+    <rootd_link_index_auth translate="label">
+        <label>Link Protection Gateway</label>
+        <remove name="right" />
+        <remove name="left" />
+        <reference name="root">
+            <action method="setTemplate">
+                <template>page/1column.phtml</template>
+            </action>
+        </reference>
+        <reference name="head">
+            <action method="addCss">
+                <stylesheet>css/link/styles.css</stylesheet>
+            </action>
+        </reference>
+        <reference name="content">
+            <block type="link/gateway" name="gateway_content" />
+        </reference>
+    </rootd_link_index_auth>
+</layout>
