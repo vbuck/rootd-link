@@ -56,8 +56,9 @@ class Rootd_Link_Block_Adminhtml_Link_Grid
             'link_id', 
             array(
                 'header'    => $helper->__('ID'),
-                'align'     => 'left',
+                'align'     => 'right',
                 'index'     => 'link_id',
+                'width'     => '80px',
             )
         );
 
@@ -71,6 +72,39 @@ class Rootd_Link_Block_Adminhtml_Link_Grid
                 'width'             => '300px',
             ));
         }
+
+        $this->addColumn(
+            'description', 
+            array(
+                'header'    => $helper->__('Description'),
+                'align'     => 'left',
+                'index'     => 'description',
+                'width'     => '220px',
+            )
+        );
+
+        $this->addColumn(
+            'request_path', 
+            array(
+                'header'    => $helper->__('Request Path'),
+                'align'     => 'left',
+                'index'     => 'request_path',
+            )
+        );
+
+        $this->addColumn(
+            'is_active', 
+            array(
+                'header'    => $helper->__('Status'),
+                'align'     => 'left',
+                'index'     => 'is_active',
+                'type'      => 'options',
+                'width'     => '120px',
+                'options'   => array(0 => $this->__('Disabled'), 1 => $this->__('Enabled')),
+                'frame_callback' 
+                            => array($this, 'decorateStatus'),
+            )
+        );
 
         return parent::_prepareColumns();
     }
@@ -99,6 +133,30 @@ class Rootd_Link_Block_Adminhtml_Link_Grid
         }
 
         return $this;
+    }
+
+    /**
+     * Decorate status column values.
+     *
+     * @return string
+     */
+    public function decorateStatus($value, $row, $column, $isExport)
+    {
+        if ($row->getStatus()) {
+            $cell = '
+                <span class="grid-severity-critical">
+                    <span>' . $value . '</span>
+                </span>
+            ';
+        } else {
+            $cell = '
+                <span class="grid-severity-notice">
+                    <span>' . $value . '</span>
+                </span>
+            ';
+        }
+
+        return $cell;
     }
 
     /**
